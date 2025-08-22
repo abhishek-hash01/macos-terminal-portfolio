@@ -2,12 +2,12 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
-import vercel from '@astrojs/vercel';
+import netlify from '@astrojs/netlify/functions';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   // Replace with your website URL (required for sitemap generation)
-  site: 'https://meetavi.in.netlify.app',
+  site: 'https://meetavi.netlify.app',
 
   // URL configuration
   trailingSlash: 'never', // Removes trailing slashes from URLs
@@ -31,7 +31,7 @@ export default defineConfig({
 
   // Deployment configuration
   output: 'server', // Server-side rendering - required for OpenAI API usage
-  adapter: vercel(), // Deploy to Vercel - optional
+  adapter: netlify(), // Deploy to Netlify - optional
   devToolbar: {
     enabled: false,
   },

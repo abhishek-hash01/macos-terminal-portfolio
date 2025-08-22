@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LandingPage from '../components/LandingPage.astro';
+---
+
+<!-- 
+  Customize these values for your portfolio:
+  - title: Your name and role
+  - description: Brief description of your expertise
+  - canonical: Your website URL
+  - openGraph: Social media sharing metadata
+-->
+<Layout
+  title='Abhishek Singh - Front-End Developer'
+  description='Front-End Developer based in Faridabad, Haryana specializing in React js, Tailwind CSS'
+  canonical='https://meetavi.me'
+  openGraph={{
+    url: 'https://meetavi.me',
+    title: 'Abhishek Singh - Front-End Developer',
+    description:
+      'Front-End Developer based in Faridabad, Haryana specializing in React js, Tailwind CSS',
+    site_name: 'Abhishek Singh',
+  }}
+>
+  <LandingPage />
+</Layout>
