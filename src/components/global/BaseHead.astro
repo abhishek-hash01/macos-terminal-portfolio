@@ -20,49 +20,49 @@ const backgrounds = await Promise.all([
   name='viewport'
   content='width=device-width, initial-scale=1, maximum-scale=1'
 />
-<meta name='author' content='John Doe' />
+<meta name='author' content='Abhishek Singh' />
 <!-- Replace with your name -->
 
 <!-- SEO Configuration - customize these values -->
 <AstroSeo
-  title={Astro.props.title || 'John Doe - Full Stack Developer'}
+  title={Astro.props.title || 'Abhishek Singh - Front End Developer'}
   description={Astro.props.description ||
-    'Full Stack Developer based in Austin, TX specializing in React, Node.js, and modern web technologies'}
-  canonical={Astro.props.canonical || 'https://johndoe.com'}
+    'Front End Developer based in Faridabad, Haryana specializing in React js, Tailwind CSS'}
+  canonical={Astro.props.canonical}
   openGraph={{
-    url: Astro.props.openGraph?.url || 'https://johndoe.com',
-    title: Astro.props.openGraph?.title || 'John Doe - Full Stack Developer',
+    url: Astro.props.openGraph?.url,
+    title: Astro.props.openGraph?.title || 'Abhishek Singh - Front End Developer',
     description:
       Astro.props.openGraph?.description ||
-      'Full Stack Developer based in Austin, TX specializing in React, Node.js, and modern web technologies',
+      'Front End Developer based in Faridabad, Haryana specializing in React js, Tailwind CSS',
     images: [
       {
-        url: '',
+        url: '/og-image.png',
         // og image here
       },
     ],
-    site_name: Astro.props.openGraph?.site_name || 'John Doe',
+    site_name: Astro.props.openGraph?.site_name || 'Abhishek Singh',
   }}
 />
 
 <!-- Add your favicon files in public/images/ -->
-<link rel='apple-touch-icon' sizes='180x180' href='/images/YOUR_FAVICON.svg' />
+<link rel='apple-touch-icon' sizes='180x180' href='/images/favicon180.png' />
 <link
   rel='icon'
   type='image/png'
   sizes='32x32'
-  href='/images/YOUR_FAVICON.svg'
+  href='/images/favicon32.png'
 />
 <link
   rel='icon'
   type='image/png'
   sizes='16x16'
-  href='/images/YOUR_FAVICON.svg'
+  href='/images/favicon16.png'
 />
 
 <!-- Theme colors for browsers -->
-<meta name='msapplication-TileColor' content='YOUR_COLOR_HEX' />
-<meta name='theme-color' content='YOUR_COLOR_HEX' />
+<meta name='msapplication-TileColor' content='#2d3748' /> 
+<meta name='theme-color' content='#2d3748' />
 
 <!-- Auto-generated sitemap -->
 <link rel='sitemap' href='/sitemap-index.xml' />

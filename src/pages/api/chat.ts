@@ -1,43 +1,39 @@
+// src/pages/api/chat.ts
 import type { APIRoute } from 'astro';
-import OpenAI from 'openai';
-
-const openai = new OpenAI({
-  apiKey: import.meta.env.OPENAI_API_KEY,
-});
 
 export const POST: APIRoute = async ({ request }) => {
-  try {
-    const body = await request.json();
+  const { prompt } = await request.json();
 
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: body.messages,
-      temperature: 0.7,
-      max_tokens: 500,
+  if (!prompt) {
+    return new Response(JSON.stringify({ error: 'Prompt is required' }), { status: 400 });
+  }
+
+  // --- This is the new Gemini API logic ---
+  try {
+    const apiKey = import.meta.env.GEMINI_API_KEY; // Get key from .env
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+    const payload = {
+      contents: [{ parts: [{ text: prompt }] }],
+    };
+
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
     });
 
-    return new Response(
-      JSON.stringify({
-        message: completion.choices[0].message.content,
-      }),
-      {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    if (!response.ok) {
+      throw new Error(`API request failed with status ${response.status}`);
+    }
+
+    const result = await response.json();
+    const aiResponse = result.candidates[0].content.parts[0].text;
+
+    return new Response(JSON.stringify({ response: aiResponse }), { status: 200 });
+
   } catch (error) {
-    return new Response(
-      JSON.stringify({
-        error: 'Failed to generate response',
-      }),
-      {
-        status: 500,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    console.error("Gemini API call failed:", error);
+    return new Response(JSON.stringify({ error: "Failed to connect to AI" }), { status: 500 });
   }
 };

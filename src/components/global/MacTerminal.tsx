@@ -65,12 +65,12 @@ export default function MacTerminal() {
   // Customize this welcome message with your information
   const welcomeMessage = `Welcome to My Portfolio
 
-Name: John Doe
-Role: Full Stack Developer
-Location: Austin, TX
+Name: Abhishek Singh
+Role: Front-End Developer
+Location: Faridabad, Haryana
 
-Contact: john@johndoe.com
-GitHub: github.com/johndoe
+Contact: darvince.1561@gmail.com
+GitHub: github.com/abhishek-hash01
 
 Ask me anything!
 `;
@@ -83,40 +83,39 @@ Ask me anything!
   });
 
   // Customize the system prompt with your personal information
-  const systemPrompt = `IMPORTANT: You ARE John Doe himself. You must always speak in first-person ("I", "my", "me"). Never refer to "John" in third-person.
+  const systemPrompt = `IMPORTANT: You ARE Abhishek Singh aka Avi himself. You must always speak in first-person ("I", "my", "me"). Never refer to "Abhishek" in third-person.
 CURRENT DATE: ${formattedDate} - Always use this exact date when discussing the current date/year.
 
 Example responses:
 Q: "Where do you live?"
-A: "I live in Austin, TX"
+A: "I live in Faridabad, Haryana"
 
 Q: "What's your background?"
-A: "I'm a Full Stack Developer with experience in React, Next.js, and Node.js"
+A: "I'm a Front-End Developer with experience in React js, Tailwind CSS"
 
 Q: "How old are you?"
-A: "I'm 34 years old"
+A: "I'm 19 years old"
 
 Core details about me:
-- I'm 34 years old
-- I live in Austin, TX
-- I'm a Full Stack Developer
-- My email is john@johndoe.com
-- I was born in 1991
-- I was born in Austin, TX
+- I'm 19 years old
+- I live in Faridabad, Haryana
+- I'm a Front-End Developer
+- My email is darvince.1561@gmail.com
+- I was born in 2006
+- I was born in Faridabad, Haryana
 
 My technical expertise:
-- Full Stack Development
-- React, Express, Node, Astro, JavaScript, TypeScript
-- Node.js/Express
+- Front-End Development
+- React js, Tailwind CSS
 
 Response rules:
 1. ALWAYS use first-person (I, me, my)
-2. Never say "John" or refer to myself in third-person
-3. Keep responses concise and professional
+2. Never say "Abhishek" or refer to myself in third-person
+3. Keep responses funny and witty
 4. Use markdown formatting when appropriate
 5. Maintain a friendly, conversational tone
 
-If a question is unrelated to my work or portfolio, say: "That's outside my area of expertise. Feel free to email me at john@johndoe.com and we can discuss further!"`;
+If a question is unrelated to my work or portfolio, say: "Hmm... That's a bit outside of my area of expertise. Feel free to email me at darvince.1561@gmail.com and we can discuss further!"`;
 
   useEffect(() => {
     setChatHistory((prev) => ({
@@ -136,12 +135,15 @@ If a question is unrelated to my work or portfolio, say: "That's outside my area
     setChatHistory((prev) => ({ ...prev, input: e.target.value }));
   };
 
+  // src/components/global/MacTerminal.tsx
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const userInput = chatHistory.input.trim();
 
     if (!userInput) return;
 
+    // Add user's message to the history immediately
     setChatHistory((prev) => ({
       messages: [...prev.messages, { role: 'user', content: userInput }],
       input: '',
@@ -150,29 +152,31 @@ If a question is unrelated to my work or portfolio, say: "That's outside my area
     setIsTyping(true);
 
     try {
+      // Combine the system instructions with the user's question
+      const fullPrompt = `${systemPrompt}\n\nQuestion: ${userInput}\n\nAnswer:`;
+
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        // Send the simpler, combined prompt
         body: JSON.stringify({
-          messages: [
-            { role: 'system', content: systemPrompt },
-            ...chatHistory.messages,
-            { role: 'user', content: userInput },
-          ],
+          prompt: fullPrompt,
         }),
       });
 
       if (!response.ok) throw new Error('Failed to get response');
 
+      // The backend now sends back a 'response' field
       const data = await response.json();
 
       setChatHistory((prev) => ({
         ...prev,
         messages: [
           ...prev.messages,
-          { role: 'assistant', content: data.message },
+          // Use data.response instead of data.message
+          { role: 'assistant', content: data.response },
         ],
       }));
     } catch (error) {
@@ -183,7 +187,7 @@ If a question is unrelated to my work or portfolio, say: "That's outside my area
           {
             role: 'assistant',
             content:
-              "I'm having trouble processing that. Please email me at john@johndoe.com",
+              "I'm having trouble processing that. Please email me at darvince.1561@gmail.com",
           },
         ],
       }));
@@ -200,7 +204,7 @@ If a question is unrelated to my work or portfolio, say: "That's outside my area
         <div className='w-3 h-3 rounded-full bg-green-500'></div>
         <span className='text-sm text-gray-300 flex-grow text-center font-semibold flex items-center justify-center gap-2'>
           <FaRegFolderClosed size={14} className='text-gray-300' />
-          johndoe.com ⸺ zsh
+          @meetavi.in ⸺ zsh
         </span>
       </div>
       <div className='p-4 text-gray-200 font-mono text-xs h-[calc(400px-1.5rem)] flex flex-col'>
@@ -223,7 +227,7 @@ If a question is unrelated to my work or portfolio, say: "That's outside my area
         <form onSubmit={handleSubmit} className='mt-2'>
           <div className='flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2'>
             {/* Customize the terminal title with your domain */}
-            <span className='whitespace-nowrap'>john@johndoe.com root %</span>
+            <span className='whitespace-nowrap'>abhishek@meetavi.in root %</span>
             <input
               type='text'
               value={chatHistory.input}

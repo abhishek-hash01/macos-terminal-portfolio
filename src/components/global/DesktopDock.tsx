@@ -8,11 +8,11 @@ export default function DesktopDock() {
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
 
   const handleEmailClick = () => {
-    window.location.href = 'mailto:john@johndoe.com';
+    window.location.href = 'mailto:darvince.1561@gmail.com';
   };
 
   const handleGithubClick = () => {
-    window.open('https://github.com/johndoe', '_blank');
+    window.open('https://github.com/abhishek-hash01', '_blank');
   };
 
   const handleCalendarClick = () => {
@@ -20,7 +20,7 @@ export default function DesktopDock() {
   };
 
   const handleSpotifyClick = () => {
-    window.open('https://open.spotify.com', '_blank');
+    window.open('https://open.spotify.com/playlist/7jzg35D9f8DqBEQpIV5dq4?si=c7aa05748e6c4ab8', '_blank');
   };
 
   const handleVSCodeClick = () => {
