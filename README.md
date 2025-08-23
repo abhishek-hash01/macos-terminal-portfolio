@@ -6,7 +6,7 @@ An interactive macOS-inspired portfolio theme for Astro, featuring an AI-powered
 
 ## Features
 
-- OpenAI-powered terminal chat
+- GEMINI-powered terminal chat
 - Dynamic rotating wallpapers
 - Responsive macOS-style dock
 - Built-in SEO optimization
@@ -21,7 +21,7 @@ An interactive macOS-inspired portfolio theme for Astro, featuring an AI-powered
 - [React](https://reactjs.org)
 - [TypeScript](https://www.typescriptlang.org)
 - [Tailwind CSS](https://tailwindcss.com)
-- [OpenAI API](https://openai.com/api)
+- [GEMINI API](https://aistudio.google.com/apikey)
 
 ## Integrations
 
@@ -35,7 +35,7 @@ An interactive macOS-inspired portfolio theme for Astro, featuring an AI-powered
 ### Prerequisites
 
 - Node.js (v18 or higher)
-- OpenAI API key
+- GEMINI API KEY
 
 ### Installation
 
@@ -49,7 +49,7 @@ An interactive macOS-inspired portfolio theme for Astro, featuring an AI-powered
    `cp .env.example .env`
 
 4. Add your OpenAI API key to the .env file:
-   `OPENAI_API_KEY=your_api_key_here`
+   `GEMINI_API_KEY=your_api_key_here`
 
 5. Start the development server:
    `npm run dev`
@@ -111,7 +111,7 @@ Contributions, issues, and feature requests are welcome!
 ## Acknowledgments
 
 - Inspired by macOS interface
-- Powered by OpenAI's API
+- Powered by GEMINI'S API
 - Built with Astro
 
 ##Credits
